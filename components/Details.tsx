@@ -98,7 +98,7 @@ const Details: React.FC = () => {
             <p>Sign In with Google</p>
             </button>):(
             <div className={styles.cafe_name}>
-                <p>Let's cook some Magic<span>✨</span></p>
+                <p>Let us cook some Magic<span>✨</span></p>
                 <div className={styles.input}>
                     <input type='text' placeholder="Type your Cafe's name " maxLength={15} value={cafeName} onChange={handleChange} onKeyDown={handleEnter}></input>
                     <h1 onClick={handleCafeName}>-&gt;</h1>

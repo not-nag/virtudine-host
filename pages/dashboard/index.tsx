@@ -34,7 +34,7 @@ const Products:React.FC = () =>{
             }
         })
 
-    }, [])
+    }, [router])
 
 
     if(authenticated){

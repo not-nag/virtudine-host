@@ -19,7 +19,7 @@ const Add:React.FC = () => {
                 router.replace('/');
             }
         })
-    }, [])
+    }, [router])
     
     return<>
         <Background />

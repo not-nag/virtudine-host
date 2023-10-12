@@ -43,7 +43,7 @@ const Background: React.FC = () => {
                 container.appendChild(emoji);
             }
         }
-    }, []); // This hook runs only once after the component is mounted
+    }, [emojiArray]); // This hook runs only once after the component is mounted
 
     // Render a div element with a reference to the containerRef and a specified CSS class
     return<>

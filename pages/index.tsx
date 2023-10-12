@@ -38,7 +38,7 @@ const Homepage: React.FC = () => {
                 setAuthenticate(false);
             }
         });
-    }, []);
+    }, [router]);
 
 
     if(authenticate){
