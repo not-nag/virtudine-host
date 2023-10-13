@@ -46,7 +46,7 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
                     theme: "colored",
                 });
                 await deleteEntry(item);
-                await deleteEntry(item);
+                await deleteFile(item);
                 router.reload();
             }catch(error){
                 toast.error('❌ Deletion failed', {
