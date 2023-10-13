@@ -27,11 +27,9 @@ const Products:React.FC = () =>{
         });
     }
    
-    useEffect(()=>{
-        toastify();
-    })
 
     useEffect(()=>{
+        toastify();
         checkAuthMiddleware((uid)=>{
             if(uid){
                 setId(uid);
