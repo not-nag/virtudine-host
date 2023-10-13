@@ -27,11 +27,13 @@ const Products:React.FC = () =>{
         });
     }
    
+    useEffect(()=>{
+        toastify();
+    })
 
     useEffect(()=>{
         checkAuthMiddleware((uid)=>{
             if(uid){
-                toastify();
                 setId(uid);
                 const dbRef = ref(getDatabase());
                 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
