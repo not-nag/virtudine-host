@@ -27,10 +27,10 @@ const Details: React.FC = () => {
                 cafeName,
         };
         const cafeData = {
-            [cafeName]: userId,
+            cafeName,
         };
         const userRef = ref(database, `users/${userId}`);
-        const cafeRef = ref(database, `cafes`)
+        const cafeRef = ref(database, `cafes/${userId}`);
         set(userRef, userData)
             .then(() => {
                 setPersistence(auth, browserLocalPersistence)

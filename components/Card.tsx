@@ -21,14 +21,23 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
         return item[0].toLowerCase().includes(search.toLowerCase());
     });
 
-    const deleteFile = (item:any) =>{
+    const deleteFile = async(item:any) =>{
         const imageRef = sRef(storage, `${uid}/${item}`);
-        return deleteObject(imageRef)
+        try{
+            await deleteObject(imageRef);
+        }catch(err){
+            console.error(err);
+        }
     }
 
-    const deleteEntry = (item:any) =>{
+    const deleteEntry = async(item:any) =>{
         const path = ref(database, `users/${uid}/menu/${item}`);
-        return remove(path);
+        
+        try{
+            await remove(path);
+        }catch(err){
+            console.error(err);
+        }
     }
 
     const handleDelete = async(item:any) => {
@@ -45,8 +54,7 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
                     progress: undefined,
                     theme: "colored",
                 });
-                await deleteEntry(item);
-                await deleteFile(item);
+                await Promise.all([deleteEntry(item), deleteFile(item)]);
                 router.reload();
             }catch(error){
                 toast.error('❌ Deletion failed', {
