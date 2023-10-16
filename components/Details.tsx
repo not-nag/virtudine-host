@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { auth, database } from '../Firebase/firebase'
 import { FirebaseError } from 'firebase/app';
-import { get, set, ref } from 'firebase/database'
+import { get, set, ref, update, push } from 'firebase/database'
 
 const Details: React.FC = () => {
     const router = useRouter();
@@ -22,26 +22,26 @@ const Details: React.FC = () => {
         }
     }
 
-    const handleCafeName = () => {
+    const handleCafeName = async() => {
         const userData = {
                 cafeName,
         };
         const cafeData = {
-            cafeName,
+            [userId]:cafeName,
         };
         const userRef = ref(database, `users/${userId}`);
-        const cafeRef = ref(database, `cafes/${userId}`);
-        set(userRef, userData)
-            .then(() => {
+        const cafeRef = ref(database, `cafes`);
+        await set(userRef, userData)
+            .then(async() => {
+                await update(cafeRef, cafeData)
+                .then(()=>{
+                    console.log("Cafe sub-details set successfully")
+                })
+                .catch((e)=>{
+                    console.error(e);
+                });
                 setPersistence(auth, browserLocalPersistence)
                 .then(()=>{
-                    set(cafeRef, cafeData)
-                    .then(()=>{
-                        console.log("Cafe sub-details set successfully")
-                    })
-                    .catch((e)=>{
-                        console.error(e);
-                    })
                     router.push('/dashboard');
                 })
                 .catch(()=>{
