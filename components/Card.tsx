@@ -21,6 +21,9 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
         return item[0].toLowerCase().includes(search.toLowerCase());
     });
 
+
+    console.log(filteredMenuItems);
+
     const deleteFile = async(item:any) =>{
         const imageRef = sRef(storage, `${uid}/${item}`);
         try{
@@ -72,7 +75,8 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
     }
 
 
-    return( <div className={styles.card_holder}>
+    return( 
+    <div className={styles.card_holder}>
         <div className={styles.cardContainer}>
             {filteredMenuItems.length === 0 ? (
                 <h1 className={styles.noItem}>No Items match your search.</h1>
@@ -82,7 +86,7 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
                 <span className={styles.delete} onClick={() => handleDelete(item[0])}>
                 ❌
                 </span>
-                <Image src={item[1]} alt="Item Image" width={190} height={190} className={styles.image} />
+                <Image src={item[1]['downloadURL']} alt="Item Image" width={190} height={190} className={styles.image} />
                 <div className={styles.pHolder}>
                     <p>{item[0]}</p>
                 </div>
