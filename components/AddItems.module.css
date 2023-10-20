@@ -47,7 +47,7 @@
 
 .warning{
     font-size: 20px;
-    margin-top: 150px;
+    margin-top: 190px;
     text-align: center;
 }
 
@@ -106,7 +106,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 120px;
+    top: 175px;
 }
 
 .submit:hover{
@@ -170,6 +170,11 @@
 
 .reset:active{
     transform: scale(0.9);
+}
+
+.ingredients{
+    position: absolute;
+    top: 65px;
 }
 
 @media (max-width: 650px){

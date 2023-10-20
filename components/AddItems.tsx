@@ -16,6 +16,7 @@ const AddItems:React.FC<AddItemsProps> =({userID}) =>{
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const[itemName, setItemName] = useState<string>('');
+    const[ingredients, setIngredients] = useState<string>('');
     const[image, setImage] = useState<File | null>(null);
 
     const toastify = ()=>{
@@ -44,6 +45,7 @@ const AddItems:React.FC<AddItemsProps> =({userID}) =>{
         console.log(userID);
         setItemName('');
         setImage(null);
+        setIngredients('');
     }
 
     const handleBack = () => {
@@ -54,7 +56,10 @@ const AddItems:React.FC<AddItemsProps> =({userID}) =>{
         try{
             const menuPath = ref(database, `users/${userID}/menu`);
             const itemData = {
-                [itemName]: downloadURL,
+                [itemName]: {
+                    downloadURL,
+                    ingredients,
+                }
             };
             await update(menuPath, itemData);
             toastify();
@@ -66,8 +71,8 @@ const AddItems:React.FC<AddItemsProps> =({userID}) =>{
     }
 
     const handleSubmit = async() => {
-        if(!itemName.trim() || !image){
-            toast.error('❌ Enter both Name and Image', {
+        if(!itemName.trim() || !image || !ingredients.trim()){
+            toast.error('❌ Enter Name, Image and Ingredients', {
             position: "top-center",
             autoClose: 1500,
             hideProgressBar: false,
@@ -112,15 +117,16 @@ const AddItems:React.FC<AddItemsProps> =({userID}) =>{
                 </div>
                 <p>Add a new item</p>
                 <input type="text" onChange={(e)=>{setItemName(e.target.value)}} value={itemName} placeholder="Name of the food"/>
-                <button type="button" onClick={handleClick} className={image?styles.button_purple:styles.button_orange}>{image?image.name:'Add Image'}</button>
-                <input type="file" accept=".jpg, .jpeg, .png " ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+                <button type="button" onClick={handleClick} className={image?styles.button_purple:styles.button_orange}>{image?image.name:'Add Object'}</button>
+                <input className={styles.ingredients}type="text" onChange={(e)=>{setIngredients(e.target.value)}} value={ingredients} placeholder="Enter the Ingredients"></input>
+                <input type="file" /*accept=".gltf, .glb, .obj"*/ ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
                 {/* {image && <p>Selected File: {image.name}</p>} */}
             </div>
             <div className={styles.buttons}>
                 <button type="button" onClick={handleReset} className={styles.reset}>Reset</button>
                 <button type="button" onClick={handleSubmit} className={styles.submit} >Add Item</button>
             </div>
-            <p className={styles.warning}><span className={styles.asterick}>*</span>Images must have transparent background.</p> 
+            <p className={styles.warning}><span className={styles.asterick}>*</span>Only 3D objects are accepted.</p> 
         </div>
     )
 }
