@@ -20,7 +20,28 @@
     justify-content: center;
     align-items: center;
     
+    
 }
+
+.inputFiles{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: 63px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    right: 10px;
+}
+
+.inputFiles button{
+    margin: 0;
+    padding: 0;
+    min-width: 44%;
+    
+}
+
+
 
 .inputItems p{
     position: absolute;
@@ -47,7 +68,7 @@
 
 .warning{
     font-size: 20px;
-    margin-top: 190px;
+    margin-top: 240px;
     text-align: center;
 }
 
@@ -106,7 +127,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 175px;
+    top: 230px;
 }
 
 .submit:hover{
@@ -174,7 +195,7 @@
 
 .ingredients{
     position: absolute;
-    top: 65px;
+    top: 115px;
 }
 
 @media (max-width: 650px){
@@ -209,6 +230,12 @@
     .reset {
         width: 50%;
     }
+
+    .inputFiles{
+        right: 13px;
+        font-size: 12px
+    }
+
 }
 
 @media (max-width: 400px){
@@ -221,5 +248,8 @@
     
         .reset {
             width: 60%;
+        }
+        .inputFiles{
+            right: 15px;
         }
 }

@@ -26,8 +26,10 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
 
     const deleteFile = async(item:any) =>{
         const imageRef = sRef(storage, `${uid}/${item}`);
+        const showRef = sRef(storage, `${uid}/show${item}`);
         try{
             await deleteObject(imageRef);
+            await deleteObject(showRef);
         }catch(err){
             console.error(err);
         }
@@ -86,7 +88,7 @@ const Card:React.FC<Card> = ({menuItems, uid, search}) =>{
                 <span className={styles.delete} onClick={() => handleDelete(item[0])}>
                 ❌
                 </span>
-                <Image src={item[1]['downloadURL']} alt="Item Image" width={190} height={190} className={styles.image} />
+                <Image src={item[1]['showURL']} alt="Item Image" width={190} height={190} className={styles.image} />
                 <div className={styles.pHolder}>
                     <p>{item[0]}</p>
                 </div>

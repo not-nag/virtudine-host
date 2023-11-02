@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 
 import styles from './Details.module.css';
+import { toast } from 'react-toastify';
 
 import Image from 'next/image';
 
@@ -23,6 +24,10 @@ const Details: React.FC = () => {
     }
 
     const handleCafeName = async() => {
+        if(cafeName == ''){
+            window.alert("Enter Cafe name");
+            return;
+        }
         const userData = {
                 cafeName,
         };
