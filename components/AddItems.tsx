@@ -21,6 +21,22 @@ const AddItems: React.FC<AddItemsProps> = ({ userID }) => {
   const[image, setImage] = useState<File | null>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
 
+  const handleClear = () => {
+    setItemName('');
+    setImage(null);
+    setThumbnail(null);
+    setIngredients('');
+  
+    // Clear file input fields
+    if (objectInputRef.current) {
+      objectInputRef.current.value = '';
+    }
+    if (thumbnailInputRef.current) {
+      thumbnailInputRef.current.value = '';
+    }
+  };
+  
+
   const imgClick = () => {
     thumbnailInputRef.current?.click();
   };
@@ -109,11 +125,8 @@ const AddItems: React.FC<AddItemsProps> = ({ userID }) => {
           progress: undefined,
           theme: "colored",
         });
-
-        setImage(null);
-        setItemName('');
-        setThumbnail(null);
-        setIngredients('');
+        
+        handleClear();
       } catch (error) {
         toast.dismiss(); // Close the "Adding item" toast
         toast.error('Error adding item', {
